@@ -346,7 +346,6 @@ class _PackageManagerScreenState extends State<PackageManagerScreen> {
     );
   }
 }
-}
 
 class CreditsScreen extends StatelessWidget {
   const CreditsScreen({super.key});
