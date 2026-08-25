@@ -310,8 +310,6 @@ class _PackageManagerScreenState extends State<PackageManagerScreen> {
 
   @override
   Widget build(BuildContext context) {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Select Package Manager(s)')),
       body: Padding(
