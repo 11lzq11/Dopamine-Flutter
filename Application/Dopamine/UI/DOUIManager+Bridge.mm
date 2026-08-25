@@ -29,7 +29,7 @@ NSArray<NSString *> *_DopamineBridgePopLogs(void)
     dispatch_once(&onceToken, ^{
         _bridgeLog = [NSMutableArray new];
         _bridgeLogLock = [NSLock new];
-        [self startLogCapture];
+        [[DOUIManager sharedInstance] startLogCapture];
     });
 
     NSArray *logs;
@@ -47,3 +47,4 @@ NSArray<NSString *> *_DopamineBridgePopLogs(void)
 
     return logs;
 }
+
