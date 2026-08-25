@@ -112,6 +112,9 @@ jobs:
       - name: List Flutter framework output
         run: find Application/Frameworks -name '*.xcframework' | head -20
 
+      - name: Copy Flutter framework to standard location
+        run: cp -a Application/Frameworks/FlutterProducts/Release/Flutter.xcframework Application/Frameworks/
+
       - name: Build native application with embedded Flutter framework
         working-directory: Application
         env:
