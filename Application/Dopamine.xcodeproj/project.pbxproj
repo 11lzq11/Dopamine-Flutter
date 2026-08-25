@@ -3009,7 +3009,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../BaseBin/.include" "$(SRCROOT)/Dopamine/UI";
+				HEADER_SEARCH_PATHS = ("$(inherited) $(SRCROOT)/../BaseBin/.include", "$(SRCROOT)/Dopamine/UI");
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../BaseBin/.build",
@@ -3071,7 +3071,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../BaseBin/.include" "$(SRCROOT)/Dopamine/UI";
+				HEADER_SEARCH_PATHS = ("$(inherited) $(SRCROOT)/../BaseBin/.include", "$(SRCROOT)/Dopamine/UI");
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../BaseBin/.build",
@@ -3429,6 +3429,7 @@
 	};
 	rootObject = 8C71980D2ABF0E82003C6658 /* Project object */;
 }
+
 
 
 
