@@ -1,11 +1,7 @@
-﻿name: dopamine
+name: dopamine
 description: Flutter (Material 3) frontend for the Dopamine jailbreak.
 publish_to: "none"
 version: 3.0.9
-
-module:
-  androidX: false
-  ios:
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -21,3 +17,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  module:
+    androidX: false
+    ios:
