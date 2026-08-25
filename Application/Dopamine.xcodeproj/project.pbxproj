@@ -1,4 +1,4 @@
-// !$*UTF8*$!
+﻿// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -225,6 +225,8 @@
 		8C7198252ABF0E84003C6658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C7198242ABF0E84003C6658 /* Assets.xcassets */; };
 		8C7198282ABF0E84003C6658 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7198262ABF0E84003C6658 /* LaunchScreen.storyboard */; };
 		8C71982B2ABF0E84003C6658 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C71982A2ABF0E84003C6658 /* main.m */; };
+		A1B2C3D40000000100000001 /* NativeBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D40000000200000002 /* NativeBridge.mm */; };
+		A1B2C3D40000000300000003 /* DOUIManager+Bridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D40000000400000004 /* DOUIManager+Bridge.mm */; };
 		8C9E46292ACA1CC700B5456A /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9E46282ACA1CC700B5456A /* UIImage+Blur.m */; };
 		8CB4087D301FFB130097E18B /* clock_alarm.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4087C301FFB050097E18B /* clock_alarm.c */; };
 		8CB94F042B59E17A0098BAFD /* basebin.tc in Resources */ = {isa = PBXBuildFile; fileRef = 8CB94F022B59E17A0098BAFD /* basebin.tc */; };
@@ -671,6 +673,9 @@
 		8C7198272ABF0E84003C6658 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C7198292ABF0E84003C6658 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C71982A2ABF0E84003C6658 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A1B2C3D40000000200000002 /* NativeBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NativeBridge.mm; sourceTree = "<group>"; };
+		A1B2C3D40000000400000004 /* DOUIManager+Bridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "DOUIManager+Bridge.mm"; path = "UI/DOUIManager+Bridge.mm"; sourceTree = "<group>"; };
+		A1B2C3D40000000500000005 /* NativeBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NativeBridge.h; sourceTree = "<group>"; };
 		8C9E46272ACA1C8D00B5456A /* UIImage+Blur.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
 		8C9E46282ACA1CC700B5456A /* UIImage+Blur.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
 		8CB4087C301FFB050097E18B /* clock_alarm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = clock_alarm.c; sourceTree = "<group>"; };
@@ -874,6 +879,7 @@
 				042479872B66916B0082581B /* DOHeaderView.m */,
 				042479832B66916B0082581B /* DOGlobalAppearance.h */,
 				042479A02B66916B0082581B /* DOGlobalAppearance.m */,
+				A1B2C3D40000000400000004 /* DOUIManager+Bridge.mm */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1358,6 +1364,8 @@
 				8C7198262ABF0E84003C6658 /* LaunchScreen.storyboard */,
 				8C7198292ABF0E84003C6658 /* Info.plist */,
 				8C71982A2ABF0E84003C6658 /* main.m */,
+				A1B2C3D40000000200000002 /* NativeBridge.mm */,
+				A1B2C3D40000000500000005 /* NativeBridge.h */,
 				04DD0B5B2B7D19E60055DE4F /* Localizable.strings */,
 			);
 			path = Dopamine;
@@ -2312,6 +2320,8 @@
 				8CB4087D301FFB130097E18B /* clock_alarm.c in Sources */,
 				0443A9B12B79D9C10014C933 /* DOPSListItemsController.m in Sources */,
 				8C71982B2ABF0E84003C6658 /* main.m in Sources */,
+				A1B2C3D40000000100000001 /* NativeBridge.mm in Sources */,
+				A1B2C3D40000000300000003 /* DOUIManager+Bridge.mm in Sources */,
 				04DD0B3D2B7C88210055DE4F /* DOLogCrashViewController.m in Sources */,
 				8614E357301AB63E00B1B88C /* DOBootstrapper+zstd.m in Sources */,
 				8C029F602B4E25350071DE58 /* DOEnvironmentManager.m in Sources */,
@@ -3419,3 +3429,8 @@
 	};
 	rootObject = 8C71980D2ABF0E82003C6658 /* Project object */;
 }
+
+
+
+
+

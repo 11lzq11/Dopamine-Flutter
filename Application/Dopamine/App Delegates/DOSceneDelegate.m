@@ -1,4 +1,4 @@
-//
+﻿//
 //  SceneDelegate.m
 //  Dopamine
 //
@@ -8,6 +8,8 @@
 #import "DOSceneDelegate.h"
 #import "DONavigationController.h"
 
+#import <Flutter/Flutter.h>
+
 @interface DOSceneDelegate ()
 
 @end
@@ -16,7 +18,7 @@
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
     UIWindow *window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
-    window.rootViewController = [[DONavigationController alloc] init];
+    window.rootViewController = [[FlutterViewController alloc] init];
     [window makeKeyAndVisible];
     self.window = window;
 }
@@ -30,7 +32,7 @@
         instance.window.alpha = 0;
     } completion:^(BOOL finished) {
         UIWindow *window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)instance.window.windowScene];
-        window.rootViewController = [[DONavigationController alloc] init];
+        window.rootViewController = [[FlutterViewController alloc] init];
         [window makeKeyAndVisible];
         instance.window = window;
         instance.window.alpha = 0;
@@ -74,3 +76,4 @@
 
 
 @end
+

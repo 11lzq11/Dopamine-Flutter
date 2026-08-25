@@ -12,3 +12,12 @@ Application/Payload
 Tools/fastPathSign/.build_*
 Exploits/kfd/kfd.framework/kfd
 .sign
+# Flutter / CocoaPods
+.ios/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+pubspec.lock
+Application/Pods/
+Application/*.xcworkspace/xcuserdata/
+Application/Podfile.lock

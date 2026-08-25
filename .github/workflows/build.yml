@@ -1,0 +1,106 @@
+﻿name: Dopamine Flutter unsigned IPA
+
+on:
+  push:
+    branches: ['**']
+    paths-ignore: ['**.md']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ios:
+    runs-on: macos-15
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Select Xcode
+        run: |
+          set -x
+          ls /Applications | grep Xcode || true
+          if [ -d /Applications/Xcode_16.4.app ]; then
+            sudo xcode-select --switch /Applications/Xcode_16.4.app
+          else
+            sudo xcode-select --switch /Applications/Xcode.app
+          fi
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Flutter pub get and analyze
+        run: |
+          set -euo pipefail
+          flutter config --no-enable-android
+          flutter pub get
+          dart analyze --fatal-infos
+
+      - name: Build Flutter iOS AOT framework
+        run: |
+          set -euo pipefail
+          flutter build ios-framework \
+            --no-debug --no-profile \
+            --output=Application/Frameworks/FlutterProducts
+
+      - name: Install Procursus and ldid
+        uses: dhinakg/procursus-action@main
+        with:
+          packages: ldid make sed coreutils findutils
+
+      - name: Download bootstraps
+        working-directory: Application/Dopamine/Resources
+        run: ./download_bootstraps.sh
+
+      - name: Build native application with embedded Flutter framework
+        working-directory: Application
+        env:
+          COMMIT_HASH: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          xcodebuild -project Dopamine.xcodeproj \
+            -scheme Dopamine \
+            -configuration Release \
+            -derivedDataPath build \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY='' \
+            CODE_SIGN_ENTITLEMENTS='' \
+            COMPILER_INDEX_STORE_ENABLE=NO \
+            GCC_PREPROCESSOR_DEFINITIONS='NIGHTLY=1 COMMIT_HASH="${COMMIT_HASH}"' \
+            FRAMEWORK_SEARCH_PATHS='$(inherited) "$(SRCROOT)/Frameworks/FlutterProducts/Release"' \
+            build | xcbeautify
+
+      - name: Embed Flutter framework and create unsigned IPA
+        run: |
+          set -euo pipefail
+          APP="Application/build/Build/Products/Release-iphoneos/Dopamine.app"
+          ENTITLEMENTS="Application/Dopamine/Dopamine.entitlements"
+          test -d "$APP"
+
+          # Embed the prebuilt Flutter engine so Dart AOT code runs at launch.
+          mkdir -p "$APP/Frameworks"
+          cp -a "Application/Frameworks/FlutterProducts/Release/Flutter.xcframework" "$APP/Frameworks/"
+
+          # Preserve jailbreak entitlements via ldid pseudo-signing while keeping the bundle unsigned.
+          ldid -S"$ENTITLEMENTS" "$APP/Dopamine"
+
+          rm -rf Payload Dopamine.ipa
+          mkdir Payload
+          cp -a "$APP" Payload/Dopamine.app
+          zip -qry Dopamine.ipa Payload
+          rm -rf Payload
+
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dopamine-Flutter-${{ github.sha }}
+          path: Dopamine.ipa
+          if-no-files-found: error
