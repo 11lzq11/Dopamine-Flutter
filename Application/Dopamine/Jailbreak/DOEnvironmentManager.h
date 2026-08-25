@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setIDownloadLoaded:(BOOL)loaded needsUnsandbox:(BOOL)needsUnsandbox;
 - (BOOL)isFakelibMounted;
 - (int)setFakelibMounted:(BOOL)mounted;
-- (int)setPrivatePrebootProtected:(BOOL)protected;
+- (int)setPrivatePrebootProtected:(BOOL)isProtected;
 - (BOOL)isJailbreakHidden;
 - (void)setJailbreakHidden:(BOOL)hidden;
 
@@ -81,3 +81,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+

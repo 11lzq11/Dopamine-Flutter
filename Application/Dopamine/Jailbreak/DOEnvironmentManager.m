@@ -629,9 +629,9 @@ extern char **environ;
     return r;
 }
 
-- (int)setPrivatePrebootProtected:(BOOL)protected
+- (int)setPrivatePrebootProtected:(BOOL)isProtected
 {
-    NSString *arg = protected ? @"activate" : @"deactivate";
+    NSString *arg = isProtected ? @"activate" : @"deactivate";
     return [self spawnJbctlAsRootWithArgs:@[@"internal", @"protection", arg]];
 }
 
@@ -904,3 +904,5 @@ extern char **environ;
 }
 
 @end
+
+
