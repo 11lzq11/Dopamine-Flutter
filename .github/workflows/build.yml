@@ -1,4 +1,4 @@
-﻿name: Dopamine Flutter unsigned IPA
+name: Dopamine Flutter unsigned IPA
 
 on:
   push:
@@ -24,7 +24,6 @@ jobs:
       - name: Select Xcode
         run: |
           set -x
-          ls /Applications | grep Xcode || true
           if [ -d /Applications/Xcode_16.4.app ]; then
             sudo xcode-select --switch /Applications/Xcode_16.4.app
           else
@@ -36,12 +35,28 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Flutter pub get and analyze
+      - name: Initialize Flutter iOS host project
         run: |
           set -euo pipefail
           flutter config --no-enable-android
+
+          # Generate the ephemeral .ios/ host for a Flutter module.
+          # Use a temp dir to avoid overwriting existing files.
+          TMPDIR=$(mktemp -d)
+          flutter create --template=module \
+            --org=com.opa334 \
+            --project-name=dopamine \
+            "$TMPDIR/dopamine"
+
+          # Copy only the generated host directory into our repo.
+          rm -rf .ios
+          cp -a "$TMPDIR/dopamine/.ios" .ios/
+
+          # Restore our pubspec (flutter create may have modified it in temp).
           flutter pub get
-          dart analyze --fatal-infos
+
+      - name: Analyze Dart
+        run: dart analyze --fatal-infos
 
       - name: Build Flutter iOS AOT framework
         run: |
@@ -76,6 +91,7 @@ jobs:
             COMPILER_INDEX_STORE_ENABLE=NO \
             GCC_PREPROCESSOR_DEFINITIONS='NIGHTLY=1 COMMIT_HASH="${COMMIT_HASH}"' \
             FRAMEWORK_SEARCH_PATHS='$(inherited) "$(SRCROOT)/Frameworks/FlutterProducts/Release"' \
+            OTHER_LDFLAGS='$(inherited) -framework Flutter' \
             build | xcbeautify
 
       - name: Embed Flutter framework and create unsigned IPA
@@ -85,11 +101,8 @@ jobs:
           ENTITLEMENTS="Application/Dopamine/Dopamine.entitlements"
           test -d "$APP"
 
-          # Embed the prebuilt Flutter engine so Dart AOT code runs at launch.
           mkdir -p "$APP/Frameworks"
           cp -a "Application/Frameworks/FlutterProducts/Release/Flutter.xcframework" "$APP/Frameworks/"
-
-          # Preserve jailbreak entitlements via ldid pseudo-signing while keeping the bundle unsigned.
           ldid -S"$ENTITLEMENTS" "$APP/Dopamine"
 
           rm -rf Payload Dopamine.ipa
