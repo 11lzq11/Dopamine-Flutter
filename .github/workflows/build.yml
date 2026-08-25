@@ -77,6 +77,9 @@ jobs:
       - name: Prepare BaseBin include headers
         run: |
           set -euo pipefail
+          brew install libarchive
+          export CFLAGS="-I$(brew --prefix libarchive)/include"
+          export LDFLAGS="-L$(brew --prefix libarchive)/lib"
           cd BaseBin
           rm -rf .include
           mkdir -p .include
@@ -92,6 +95,9 @@ jobs:
       - name: Build libjailbreak
         run: |
           set -euo pipefail
+          brew install libarchive
+          export CFLAGS="-I$(brew --prefix libarchive)/include"
+          export LDFLAGS="-L$(brew --prefix libarchive)/lib"
           cd BaseBin
           mkdir -p .build
           cp -r _external/basebin/* .build
@@ -145,6 +151,7 @@ jobs:
           name: Dopamine-Flutter-${{ github.sha }}
           path: Dopamine.ipa
           if-no-files-found: error
+
 
 
 
