@@ -107,6 +107,7 @@ jobs:
           mkdir -p .include/choma
           cp -r ChOma/output/ios/include/choma/* .include/choma/
           make -C libjailbreak
+          cp libjailbreak/libjailbreak.dylib .build/
 
       - name: Build native application with embedded Flutter framework
         working-directory: Application
@@ -151,6 +152,7 @@ jobs:
           name: Dopamine-Flutter-${{ github.sha }}
           path: Dopamine.ipa
           if-no-files-found: error
+
 
 
 
