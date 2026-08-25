@@ -1,4 +1,4 @@
-﻿// !$*UTF8*$!
+// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -674,7 +674,7 @@
 		8C7198292ABF0E84003C6658 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C71982A2ABF0E84003C6658 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A1B2C3D40000000200000002 /* NativeBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NativeBridge.mm; sourceTree = "<group>"; };
-		A1B2C3D40000000400000004 /* DOUIManager+Bridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "DOUIManager+Bridge.mm"; path = "UI/DOUIManager+Bridge.mm"; sourceTree = "<group>"; };
+		A1B2C3D40000000400000004 /* DOUIManager+Bridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "DOUIManager+Bridge.mm"; name = "DOUIManager+Bridge.mm"; path = "DOUIManager+Bridge.mm"; sourceTree = "<group>"; };
 		A1B2C3D40000000500000005 /* NativeBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NativeBridge.h; sourceTree = "<group>"; };
 		8C9E46272ACA1C8D00B5456A /* UIImage+Blur.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
 		8C9E46282ACA1CC700B5456A /* UIImage+Blur.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
@@ -3429,6 +3429,7 @@
 	};
 	rootObject = 8C71980D2ABF0E82003C6658 /* Project object */;
 }
+
 
 
 
