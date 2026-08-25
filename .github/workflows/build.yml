@@ -102,7 +102,7 @@ jobs:
           mkdir -p .build
           cp -r _external/basebin/* .build
           cp _external/basebin/.version .build
-          make -C ChOma TARGET=ios DISABLE_SIGNING=1 DISABLE_TESTS=1 DYLIB_LDFLAGS="-install_name @loader_path/libchoma.dylib"
+          make -C ChOma TARGET=ios DISABLE_SIGNING=1 DISABLE_TESTS=1 DYLIB_LDFLAGS="-install_name @loader_path/libchoma.dylib -framework CoreFoundation"
           cp ChOma/output/ios/lib/libchoma.dylib .build
           mkdir -p .include/choma
           cp -r ChOma/output/ios/include/choma/* .include/choma/
@@ -151,6 +151,7 @@ jobs:
           name: Dopamine-Flutter-${{ github.sha }}
           path: Dopamine.ipa
           if-no-files-found: error
+
 
 
 
