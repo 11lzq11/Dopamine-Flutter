@@ -134,7 +134,7 @@ jobs:
             CODE_SIGN_IDENTITY='' \
             CODE_SIGN_ENTITLEMENTS='' \
             COMPILER_INDEX_STORE_ENABLE=NO \
-            GCC_PREPROCESSOR_DEFINITIONS='NIGHTLY=1 COMMIT_HASH="${COMMIT_HASH}"' \
+            GCC_PREPROCESSOR_DEFINITIONS='NIGHTLY=1 COMMIT_HASH=\"${COMMIT_HASH}\"' \
             FRAMEWORK_SEARCH_PATHS='$(inherited) "$(SRCROOT)/Frameworks/FlutterEngine"' \
             OTHER_LDFLAGS='$(inherited) -framework Flutter -F $(SRCROOT)/Frameworks/FlutterProducts/Release' \
             build | xcbeautify
@@ -162,6 +162,7 @@ jobs:
           name: Dopamine-Flutter-${{ github.sha }}
           path: Dopamine.ipa
           if-no-files-found: error
+
 
 
 
