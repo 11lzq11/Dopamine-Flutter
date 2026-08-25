@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'dopamine_ffi.dart';
+import 'ffi/dopamine_ffi.dart';
 
 void runDopamineApp() => runApp(const DopamineApp());
 
@@ -96,9 +96,9 @@ class JailbreakController {
     }
   }
 
-  void action(String action, [Map<String, dynamic> args = const {}]) {
+  void action(String action, {Map<String, dynamic> arguments = const {}}) {
     try {
-      DopamineFfi.instance().action(action, arguments: args);
+      DopamineFfi.instance().action(action, arguments: arguments);
     } catch (error) {
       logs.add(error.toString());
     }
@@ -286,7 +286,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       OptionCard(child: ListTile(leading: const Icon(Icons.inventory_2_outlined), title: const Text('Reinstall Package Managers'), onTap: () => Navigator.pushNamed(context, '/package-managers'))),
       OptionCard(child: ListTile(leading: const Icon(Icons.visibility_off_outlined), title: const Text('Hide Jailbreak'), onTap: () => JailbreakController.instance.action('hideJailbreak'))),
       const SectionLabel('Customization'),
-      OptionCard(child: ListTile(leading: const Icon(Icons.palette_outline), title: const Text('Theme'), subtitle: const Text('Material 3 Dynamic'), trailing: SegmentedButton<String>(segments: const [ButtonSegment(value: 'default', label: Text('Green')), ButtonSegment(value: 'ellekit', label: Text('ElleKit')), ButtonSegment(value: 'purple', label: Text('Dusk'))], selected: {store.theme}, onSelectionChanged: (selection) => setState(() => store.update(() => store.theme = selection.first))))),
+      OptionCard(child: ListTile(leading: const Icon(Icons.palette_outlined), title: const Text('Theme'), subtitle: const Text('Material 3 Dynamic'), trailing: SegmentedButton<String>(segments: const [ButtonSegment(value: 'default', label: Text('Green')), ButtonSegment(value: 'ellekit', label: Text('ElleKit')), ButtonSegment(value: 'purple', label: Text('Dusk'))], selected: {store.theme}, onSelectionChanged: (selection) => setState(() => store.update(() => store.theme = selection.first))))),
       const SectionLabel('Boot Logo'),
       OptionCard(child: SwitchListTile(title: const Text('Enabled'), value: store.bootLogoEnabled, onChanged: (v) => setState(() => store.update(() => store.bootLogoEnabled = v)))),
       if (store.bootLogoEnabled)
@@ -355,3 +355,6 @@ class LicenseScreen extends StatelessWidget {
     OptionCard(child: ListTile(title: Text('BSD-2-Clause'), subtitle: Text('Procursus bootstrap packages'))),
   ]));
 }
+
+
+
