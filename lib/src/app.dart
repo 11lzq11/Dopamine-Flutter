@@ -310,15 +310,44 @@ class _PackageManagerScreenState extends State<PackageManagerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text('Select Package Manager(s)')), body: Padding(padding: const EdgeInsets.all(24), child: Column(children: [
-      Text('If you are unsure which one to select, select Sileo', textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyMedium),
-      const SizedBox(height: 24),
-      Wrap(spacing: 16, runSpacing: 16, alignment: WrapAlignment.center, children: [
-        FilterChip(selected: sileo, label: const Text('Sileo'), onSelected: (v) => setState(() => sileo = v)),
-        FilterChip(selected: zebra, label: const Text('Zebra'), onSelected: (v) => setState(() => zebra = v)),
-      ])])),
-      bottomNavigationBar: SafeArea(minimum: const EdgeInsets.all(24), child: FilledButton.icon(onPressed: sileo || zebra ? () { JailbreakController.instance.action('setPackageManagers', arguments: {'enabled': [if (sileo) 'org.coolstar.SileoStore', if (zebra) 'xyz.willy.Zebra']}); Navigator.pop(context); } : null, icon: const Icon(Icons.arrow_forward_rounded), label: const Text('Continue')))));
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Select Package Manager(s)')),
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          children: [
+            Text('If you are unsure which one to select, select Sileo',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium),
+            const SizedBox(height: 24),
+            Wrap(spacing: 16, runSpacing: 16, alignment: WrapAlignment.center, children: [
+              FilterChip(selected: sileo, label: const Text('Sileo'), onSelected: (v) => setState(() => sileo = v)),
+              FilterChip(selected: zebra, label: const Text('Zebra'), onSelected: (v) => setState(() => zebra = v)),
+            ]),
+          ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        minimum: const EdgeInsets.all(24),
+        child: FilledButton.icon(
+          onPressed: (sileo || zebra) ? () {
+            JailbreakController.instance.action('setPackageManagers', arguments: {
+              'enabled': [
+                if (sileo) 'org.coolstar.SileoStore',
+                if (zebra) 'xyz.willy.Zebra',
+              ],
+            });
+            Navigator.pop(context);
+          } : null,
+          icon: const Icon(Icons.arrow_forward_rounded),
+          label: const Text('Continue'),
+        ),
+      ),
+    );
   }
+}
 }
 
 class CreditsScreen extends StatelessWidget {
@@ -355,6 +384,7 @@ class LicenseScreen extends StatelessWidget {
     OptionCard(child: ListTile(title: Text('BSD-2-Clause'), subtitle: Text('Procursus bootstrap packages'))),
   ]));
 }
+
 
 
 
