@@ -74,6 +74,14 @@ jobs:
         working-directory: Application/Dopamine/Resources
         run: ./download_bootstraps.sh
 
+      - name: Prepare BaseBin include headers
+        run: |
+          set -euo pipefail
+          cd BaseBin
+          rm -rf .include
+          mkdir -p .include
+          cp -r _external/include/* .include
+
       - name: Build native application with embedded Flutter framework
         working-directory: Application
         env:
@@ -117,4 +125,5 @@ jobs:
           name: Dopamine-Flutter-${{ github.sha }}
           path: Dopamine.ipa
           if-no-files-found: error
+
 
