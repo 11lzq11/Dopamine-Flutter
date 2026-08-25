@@ -62,7 +62,7 @@ jobs:
         run: |
           set -euo pipefail
           flutter build ios-framework \
-            --no-debug --no-profile \
+            --no-debug --no-profile --no-codesign \
             --output=Application/Frameworks/FlutterProducts
 
       - name: Install Procursus and ldid
@@ -117,3 +117,4 @@ jobs:
           name: Dopamine-Flutter-${{ github.sha }}
           path: Dopamine.ipa
           if-no-files-found: error
+
