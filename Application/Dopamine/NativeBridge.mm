@@ -1,4 +1,4 @@
-﻿#import "NativeBridge.h"
+#import "NativeBridge.h"
 #import "DOUIManager+Bridge.h"
 #import <sys/utsname.h>
 #import <os/log.h>

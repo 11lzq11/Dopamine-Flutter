@@ -1,4 +1,4 @@
-﻿#ifndef DOPAMINE_NATIVE_BRIDGE_H
+#ifndef DOPAMINE_NATIVE_BRIDGE_H
 #define DOPAMINE_NATIVE_BRIDGE_H
 
 #import <Foundation/Foundation.h>

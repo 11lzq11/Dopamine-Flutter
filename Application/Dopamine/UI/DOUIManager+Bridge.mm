@@ -1,4 +1,4 @@
-﻿#import "DOUIManager+Bridge.h"
+#import "DOUIManager+Bridge.h"
 
 static NSMutableArray<NSString *> *_bridgeLog;
 static NSLock *_bridgeLogLock;
