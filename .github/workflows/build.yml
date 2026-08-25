@@ -129,7 +129,7 @@ jobs:
             COMPILER_INDEX_STORE_ENABLE=NO \
             GCC_PREPROCESSOR_DEFINITIONS='NIGHTLY=1 COMMIT_HASH="${COMMIT_HASH}"' \
             FRAMEWORK_SEARCH_PATHS='$(inherited) "$(SRCROOT)/Frameworks/FlutterProducts/Release" "$(SRCROOT)/Frameworks"' \
-            OTHER_LDFLAGS='$(inherited) -framework Flutter' \
+            OTHER_LDFLAGS='$(inherited) -framework Flutter -F $(SRCROOT)/Frameworks/FlutterProducts/Release' \
             build | xcbeautify
 
       - name: Embed Flutter framework and create unsigned IPA
@@ -155,6 +155,7 @@ jobs:
           name: Dopamine-Flutter-${{ github.sha }}
           path: Dopamine.ipa
           if-no-files-found: error
+
 
 
 
