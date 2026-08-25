@@ -113,7 +113,9 @@ jobs:
         run: find Application/Frameworks -name '*.xcframework' | head -20
 
       - name: Copy Flutter framework to standard location
-        run: cp -a Application/Frameworks/FlutterProducts/Release/Flutter.xcframework Application/Frameworks/
+        run: |
+          mkdir -p Application/Frameworks/FlutterEngine
+          cp -a Application/Frameworks/FlutterProducts/Release/Flutter.xcframework/ios-arm64/Flutter.framework Application/Frameworks/FlutterEngine/
 
       - name: Build native application with embedded Flutter framework
         working-directory: Application
@@ -131,7 +133,7 @@ jobs:
             CODE_SIGN_ENTITLEMENTS='' \
             COMPILER_INDEX_STORE_ENABLE=NO \
             GCC_PREPROCESSOR_DEFINITIONS='NIGHTLY=1 COMMIT_HASH="${COMMIT_HASH}"' \
-            FRAMEWORK_SEARCH_PATHS='$(inherited) "$(SRCROOT)/Frameworks/FlutterProducts/Release" "$(SRCROOT)/Frameworks"' \
+            FRAMEWORK_SEARCH_PATHS='$(inherited) "$(SRCROOT)/Frameworks/FlutterEngine"' \
             OTHER_LDFLAGS='$(inherited) -framework Flutter -F $(SRCROOT)/Frameworks/FlutterProducts/Release' \
             build | xcbeautify
 
@@ -143,7 +145,7 @@ jobs:
           test -d "$APP"
 
           mkdir -p "$APP/Frameworks"
-          cp -a "Application/Frameworks/FlutterProducts/Release/Flutter.xcframework" "$APP/Frameworks/"
+          mkdir -p "$APP/Frameworks"`n          cp -a "Application/Frameworks/FlutterEngine/Flutter.framework" "$APP/Frameworks/"
           ldid -S"$ENTITLEMENTS" "$APP/Dopamine"
 
           rm -rf Payload Dopamine.ipa
@@ -158,6 +160,7 @@ jobs:
           name: Dopamine-Flutter-${{ github.sha }}
           path: Dopamine.ipa
           if-no-files-found: error
+
 
 
 
