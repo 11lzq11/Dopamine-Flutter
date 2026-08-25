@@ -81,6 +81,11 @@ jobs:
           rm -rf .include
           mkdir -p .include
           cp -r _external/include/* .include
+          # Remove bundled XPC headers if the SDK already provides them (iOS 17.4+).
+          SDK_XPC="$(xcrun --sdk iphoneos --show-sdk-path)/usr/include/xpc.modulemap"
+          if [ -f "$SDK_XPC" ]; then
+            rm -rf .include/xpc
+          fi
 
       - name: Build native application with embedded Flutter framework
         working-directory: Application
@@ -125,5 +130,6 @@ jobs:
           name: Dopamine-Flutter-${{ github.sha }}
           path: Dopamine.ipa
           if-no-files-found: error
+
 
 
