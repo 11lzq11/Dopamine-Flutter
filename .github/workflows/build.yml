@@ -89,6 +89,17 @@ jobs:
             rm -rf .include/xpc
           fi
 
+      - name: Build libjailbreak
+        run: |
+          set -euo pipefail
+          cd BaseBin
+          mkdir -p .build
+          cp -r _external/basebin/* .build
+          cp _external/basebin/.version .build
+          make -C ChOma TARGET=ios DISABLE_SIGNING=1 DISABLE_TESTS=1 DYLIB_LDFLAGS="-install_name @loader_path/libchoma.dylib"
+          cp ChOma/output/ios/lib/libchoma.dylib .build
+          make -C libjailbreak
+
       - name: Build native application with embedded Flutter framework
         working-directory: Application
         env:
@@ -132,6 +143,7 @@ jobs:
           name: Dopamine-Flutter-${{ github.sha }}
           path: Dopamine.ipa
           if-no-files-found: error
+
 
 
 
