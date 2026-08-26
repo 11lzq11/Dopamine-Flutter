@@ -94,6 +94,8 @@ jobs:
           cp -r _external/include/* .include
           mkdir -p .include/libjailbreak
           cp libjailbreak/src/*.h .include/libjailbreak/
+          mkdir -p .include/libjailbreak/src
+          cp libjailbreak/src/libjailbreak.h .include/libjailbreak/src/
           mkdir -p .include/xpf
           cp XPF/src/xpf.h .include/xpf/
           # Remove bundled XPC headers if the SDK already provides them (iOS 17.4+).
@@ -170,6 +172,7 @@ jobs:
           name: Dopamine-Flutter-${{ github.sha }}
           path: Dopamine.ipa
           if-no-files-found: error
+
 
 
 
